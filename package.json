@@ -1,0 +1,39 @@
+{
+  "name": "hireonix",
+  "version": "1.0.0",
+  "description": "A simplified ATS with NLP parsing",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "build": "tsc -p .",
+    "prettier": "prettier --write src/**/*.ts",
+    "lint": "npm run prettier && eslint src/**/*.ts"
+  },
+  "author": "rick-23",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongodb": "^6.15.0",
+    "cookie-parser": "^1.4.7",
+    "http-errors": "^2.0.0",
+    "morgan": "^1.10.0",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/debug": "^4.1.12",
+    "@types/express": "^5.0.1",
+    "@types/http-errors": "^2.0.4",
+    "@types/morgan": "^1.9.9",
+    "@typescript-eslint/eslint-plugin": "^8.30.1",
+    "eslint": "^9.24.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "nodemon": "^3.1.9",
+    "prettier": "^3.5.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
