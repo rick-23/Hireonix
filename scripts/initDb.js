@@ -25,6 +25,7 @@ async function initializeDatabase() {
       _id: 'cd728ff1d4e30b41921dcb35b1c29ead',
       fileName: 'test_resume.pdf',
       fileContent: `Bane Smith
+
       Bane.smith@example.com
       
       Experience:

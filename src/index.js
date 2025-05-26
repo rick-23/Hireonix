@@ -9,6 +9,8 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 const { handleError } = require('./helpers/error');
 const httpLogger = require('./middlewares/httpLogger');
 const profiles = require('./routes/profiles');
+const { authRouter } = require('./routes/auth');
+const cors = require('cors');
 
 const app = express();
 
@@ -16,8 +18,14 @@ app.use(httpLogger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  }),
+);
 
-app.use('/', profiles);
+app.use('/', profiles, authRouter);
 
 // catch 404 and forward to error handler
 app.use((_req, _res, next) => {

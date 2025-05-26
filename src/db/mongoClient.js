@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient } = require('mongodb');
 
 let db;
 
@@ -8,16 +8,22 @@ const connectToDatabase = async () => {
   const client = new MongoClient(process.env.MONGO_URI);
   await client.connect();
   db = client.db(process.env.MONGO_DB_NAME);
-  console.log("MongoDB connected");
+  console.log('MongoDB connected');
   return db;
 };
 
 const getProfilesCollection = async () => {
   const database = await connectToDatabase();
-  return database.collection("Profiles");
+  return database.collection('Profiles');
 };
 
-module.exports = { 
+async function getUsersCollection() {
+  const db = await connectToDatabase();
+  return db.collection('Users');
+}
+
+module.exports = {
   connectToDatabase,
-  getProfilesCollection
+  getProfilesCollection,
+  getUsersCollection,
 };
