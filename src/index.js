@@ -1,23 +1,31 @@
-import createError from 'http-errors';
-import express from 'express';
-import path from 'path';
-import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
-import http from 'http';
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+const http = require('http');
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
-import { handleError } from './helpers/error';
-import httpLogger from './middlewares/httpLogger';
-import router from './routes/index';
+const { handleError } = require('./helpers/error');
+const httpLogger = require('./middlewares/httpLogger');
+const profiles = require('./routes/profiles');
+const { authRouter } = require('./routes/auth');
+const cors = require('cors');
 
-const app: express.Application = express();
+const app = express();
 
 app.use(httpLogger);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  }),
+);
 
-app.use('/', router);
+app.use('/', profiles, authRouter);
 
 // catch 404 and forward to error handler
 app.use((_req, _res, next) => {
@@ -25,7 +33,7 @@ app.use((_req, _res, next) => {
 });
 
 // error handler
-const errorHandler: express.ErrorRequestHandler = (err, _req, res) => {
+const errorHandler = (err, _req, res) => {
   handleError(err, res);
 };
 app.use(errorHandler);
@@ -35,7 +43,7 @@ app.set('port', port);
 
 const server = http.createServer(app);
 
-function onError(error: { syscall: string; code: string }) {
+function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
