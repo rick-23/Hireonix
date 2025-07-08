@@ -2,10 +2,10 @@
   "name": "hireonix",
   "version": "1.0.0",
   "description": "A simplified ATS with NLP parsing",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node ./src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "node ./src/server.js",
+    "dev": "nodemon src/server.js",
     "prettier": "prettier --write src/**/*.js",
     "lint": "npm run prettier && eslint src/**/*.js",
     "init-db": "node scripts/initDb.js"
